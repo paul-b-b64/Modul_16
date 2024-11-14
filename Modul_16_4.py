@@ -18,10 +18,11 @@ def get_message() -> list:
 
 @app.post("/user/{username}/{age}")
 def create_user(user: User, username: str, age: int):
-    user_id = len(users) + 1
-    user = User(user_id, username, age)
+    user.id = len(users)
+    user.username = username
+    user.age = age
     users.append(user)
-    return f"{users[user_id]} registered"
+    return f"{users[user.id]} registered"
 
 # @app.put("/user/{user_id}/{username}/{age}")
 # async def update_user(user_id: str, username: str, age: int):
