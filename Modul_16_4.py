@@ -14,13 +14,13 @@ class User(BaseModel):
 
 
 @app.get("/users")
-async def get_message() -> list:
+def get_message() -> list:
     return users
 
 
 @app.post("/user/{username}/{age}")
-async def create_user(user: User, username: str, age: int):
-    user.id = len(users) + 1
+def create_user(user: User, username: str, age: int):
+    user.id = max([x.id for x in users], default=0) + 1
     user.username = username
     user.age = age
     users.append(user)
@@ -28,7 +28,7 @@ async def create_user(user: User, username: str, age: int):
 
 
 @app.put("/user/{user_id}/{username}/{age}")
-async def update_user(user_id: int, username: str, age: int):
+def update_user(user_id: int, username: str, age: int):
     try:
         edit_user = users[user_id - 1]
         edit_user.username = username
@@ -39,7 +39,7 @@ async def update_user(user_id: int, username: str, age: int):
 
 
 @app.delete("/user/{user_id}")
-async def delete_user(user_id: int):
+def delete_user(user_id: int):
     try:
         popped_user = users.pop(user_id - 1)
         return popped_user
