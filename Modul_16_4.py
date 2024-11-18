@@ -27,7 +27,7 @@ def create_user(user: User, username: str, age: int):
     return user
 
 
-@app.put("/user/{user_id}/{username}/{age}")  # тоже логика не та, после delete исправить
+@app.put("/user/{user_id}/{username}/{age}")
 def update_user(user_id: int, username: str, age: int):
     try:
         index = None
