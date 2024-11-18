@@ -30,11 +30,15 @@ def create_user(user: User, username: str, age: int):
 @app.put("/user/{user_id}/{username}/{age}")  # тоже логика не та, после delete исправить
 def update_user(user_id: int, username: str, age: int):
     try:
-        edit_user = users[user_id - 1]
+        index = None
+        for i in range(len(users)):
+            if users[i].id == user_id:
+                index = i
+        edit_user = users[index]
         edit_user.username = username
         edit_user.age = age
         return edit_user
-    except IndexError:
+    except TypeError:
         raise HTTPException(status_code=404, detail="User was not found")
 
 
