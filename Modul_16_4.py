@@ -14,7 +14,7 @@ class User(BaseModel):
 
 
 @app.get("/users")
-def get_message() -> list:
+def get_users():
     return users
 
 
@@ -27,7 +27,7 @@ def create_user(user: User, username: str, age: int):
     return user
 
 
-@app.put("/user/{user_id}/{username}/{age}")
+@app.put("/user/{user_id}/{username}/{age}")  # тоже логика не та, после delete исправить
 def update_user(user_id: int, username: str, age: int):
     try:
         edit_user = users[user_id - 1]
@@ -41,7 +41,11 @@ def update_user(user_id: int, username: str, age: int):
 @app.delete("/user/{user_id}")
 def delete_user(user_id: int):
     try:
-        popped_user = users.pop(user_id - 1)
+        index = None
+        for i in range(len(users)):
+            if users[i].id == user_id:
+                index = i
+        popped_user = users.pop(index)
         return popped_user
-    except:
+    except TypeError:
         raise HTTPException(status_code=404, detail="User was not found")
