@@ -36,7 +36,7 @@ async def get_users(request: Request, user_id: int):
         for i in range(len(users)):
             if users[i].id == user_id:
                 index = i
-        return templates.TemplateResponse("users.html", {"request": request, "users": users[index]})
+        return templates.TemplateResponse("users.html", {"request": request, "user": users[index]})
     except IndexError:
         raise HTTPException(status_code=404, detail="User was not found")
 
