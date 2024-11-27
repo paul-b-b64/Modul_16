@@ -1,13 +1,15 @@
 {% extends 'main.html'%}
 {% block crud_container %}
     {% if user %}
-        <article class="card container fluid"></article>
+    <article class="card container fluid">
         <br>
         <p>
             {{user.id}}  <br>
             {{user.username}}   <br>
             {{user.age}}
         </p>
+    </article>
+
         <!-- Напишите свой код здесь (Вывод свойств объекта User) -->
     {% else %}
             <section class="container-fluid">
