@@ -1,8 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, status, HTTPException
 from app.backend.db import Base
+from app.backend.db_depends import get_db
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy import insert, select, update, delete
+from sqlalchemy.sql import text
+from sqlalchemy.orm import relationship, Session
 from app.models import *
+from typing import Annotated
+from app.routers.schemas import CreateUser, UpdateUser
+from slugify import slugify
 
 class Task(Base):
     __tablename__ = 'tasks'
