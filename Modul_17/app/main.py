@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.models import task, user
+from app.routers import task, user
 from app.backend.db import engine, Base
 
 app = FastAPI()
